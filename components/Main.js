@@ -1,8 +1,9 @@
 import html from "html-literal";
 import * as views from "./views";
 
-export default state => html`
-  ${views[state.view](state)}
+export default () => html`
+  ${views["Home"]()}, ${views["Activities"]()}, ${views["Profile"]()},
+  ${views["Contact"]()}, ${views["Library"]()}
 `;
 /* <div class="container">
 <div id="sidebar_menu">

@@ -11,8 +11,9 @@ export default links => html`
         )
         .join("")}
     </ul>
+    <
     <div class="searchbar">
-        <input type="text" placeholder="Search..">
-      </div>
+      <input type="text" placeholder="Search.." />
+    </div>
   </nav>
 `;
