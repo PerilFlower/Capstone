@@ -1,0 +1,44 @@
+body, html  {
+  background-image: url("./assets/imgs/istockphoto-1283307885-612x612.jpg");
+  background-color:black;
+  margin: 0;
+  padding: 0;
+  }
+
+  .top_navbar {
+    background-color: #165261;
+    display: flex;
+    justify-content: space-between;
+  }
+  .searchbar {
+  width:
+  }
+
+  #labels{
+    color: aliceblue;
+  }
+
+  .container {
+    display: flex;
+    position: relative;
+  }
+  #sidebar_menu .inner_sidebar_menu {
+    background-color: #361952;
+    border-radius: %;
+    position: fixed;
+    justify-content: column;
+    width: 200px;
+    height: 100%;
+    padding: 30px 0;
+    }
+    #sidebar_menu .inner_sidebar_menu ul {
+  padding: 15px;
+  display: block;
+  }
+
+
+  .contactnav {
+    background-color: #303245;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
