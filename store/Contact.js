@@ -1,4 +1,4 @@
 export default {
-  header: "My Activities Page",
-  view: "Activities"
+  header: "My Contact Page",
+  view: "Contact"
 };
