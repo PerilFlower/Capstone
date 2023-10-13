@@ -1,6 +1,6 @@
 import html from "html-literal";
 
-export default state => html`
+export default () => html`
   <footer>
     &copy; 2023 <a href="https://ProximaCentury.com/">ProximaCentury</a>
     <div>
