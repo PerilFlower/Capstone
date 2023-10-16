@@ -1,10 +1,10 @@
 import html from "html-literal";
 import * as views from "./views";
 
-export default state => html`
-  ${views["Home"]()}, ${views["Activities"]()}, ${views["Profile"]()},
-  ${views["Contact"]()}, ${views["Library"]()}
-`;
+export default state =>
+  html`
+    ${views[state.view](state)}
+  `;
 /* <div class="container">
 <div id="sidebar_menu">
 <div class="inner_sidebar_menu">
