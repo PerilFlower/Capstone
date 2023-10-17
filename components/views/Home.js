@@ -5,7 +5,9 @@ export default state => html`
     <h1>TRENDING</h1>
     <h1>LIBRARY</h1>
   </div>
+  <h3>
+    The weather in ${state.weather.city} is ${state.weather.description}.
+    Temperature is ${state.weather.temp}F, and it feels like
+    ${state.weather.feelsLike}F.
+  </h3>
 `;
-// <!-- <h3>
-// insert import statement for api using query params
-// There is a ${state.space.point} near ${state.space.description} -->
