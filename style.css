@@ -42,3 +42,9 @@ body, html  {
     width: 100%;
     position: absolute;
     bottom: 0;
+  }
+
+#weather {
+  font-size: medium;
+  color: white ;
+}
