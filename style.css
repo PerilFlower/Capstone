@@ -9,13 +9,22 @@ body, html  {
     background-color: #165261;
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
   }
+  #logo {
+    display: block;
+    margin-left: 88%;
+    margin-right: auto;
+    width: 100%;}
+
   .searchbar {
   width:
   }
 
   #labels{
     color: aliceblue;
+    margin: 0 auto;
+    text-align: center;
   }
 
   .container {
@@ -23,8 +32,8 @@ body, html  {
     position: relative;
   }
   #sidebar_menu .inner_sidebar_menu {
-    background-color: #361952;
-    border-radius: %;
+    background-color:#ffe108;
+    border-radius: 3%;
     position: fixed;
     justify-content: column;
     width: 200px;
@@ -48,3 +57,11 @@ body, html  {
   font-size: medium;
   color: white ;
 }
+
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+justify-content:space-evenly;
+border: 5px solid;
+border-color: #ffe108;}
