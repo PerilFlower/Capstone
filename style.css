@@ -32,7 +32,6 @@ body, html  {
     position: relative;
   }
   #sidebar_menu .inner_sidebar_menu {
-    background-color:#ffe108;
     border-radius: 3%;
     position: fixed;
     justify-content: column;
@@ -62,6 +61,8 @@ body, html  {
 .nav-links {
   display: flex;
   flex-direction: row;
-justify-content:space-evenly;
-border: 5px solid;
-border-color: #ffe108;}
+justify-content:space-evenly;}
+
+.nav-links:hover {
+  background-color: #ffe108;
+list-style: none;}
