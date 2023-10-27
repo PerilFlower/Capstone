@@ -10,6 +10,7 @@ body, html  {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+    height: 25%;
   }
   #logo {
     display: block;
@@ -25,9 +26,10 @@ body, html  {
     color: aliceblue;
     margin: 0 auto;
     text-align: center;
+    font-family: Ubuntu, bold;
   }
 
-  .container {
+  /* .container {
     display: flex;
     position: relative;
   }
@@ -42,7 +44,7 @@ body, html  {
     #sidebar_menu .inner_sidebar_menu ul {
   padding: 15px;
   display: block;
-  }
+  } */
 
 
   .contactnav {
@@ -50,6 +52,7 @@ body, html  {
     width: 100%;
     position: absolute;
     bottom: 0;
+    text-align: center;
   }
 
 #weather {
@@ -66,3 +69,15 @@ justify-content:space-evenly;}
 .nav-links:hover {
   background-color: #ffe108;
 list-style: none;}
+
+
+
+#effect:hover {
+  background-color: aliceblue;}
+
+
+  #smalllabel {
+    color: aliceblue;
+    margin: 0 auto;
+    text-align: center;
+  font-family: Play,regular;}

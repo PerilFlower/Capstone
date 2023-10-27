@@ -2,7 +2,7 @@ import html from "html-literal";
 
 export default () => html`
   <footer>
-    &copy; 2023 <a href="https://ProximaCentury.com/">ProximaCentury</a>
+    &copy; 2023 <a href="">ProximaCentury</a>
     <div>
       <div class="contactnav">
         <h5>CONTACT</h5>
@@ -11,5 +11,7 @@ export default () => html`
         </ul>
       </div>
     </div>
+    <p>photos provided by</p>
+    <p>&copy; 2018-2023 <a href="https://creazilla.com/">Creazilla</a></p>
   </footer>
 `;

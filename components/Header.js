@@ -8,8 +8,11 @@ export default state => html`
         <div id="logo">
           <img src="${Image}" height="100px" width="100px" />
         </div>
-        <div id="profilephoto">
-          <a href="#"></a><img src="${Image2}" height="70px" width="70px" />
+        <div class="profilephoto">
+          <img src="${Image2}" height="70px" width="70px" />
+          <div id="effect">
+          <a href="Profile.js"></a>
+          <button>Profile</button>
         </div>
       </div>
     </div>

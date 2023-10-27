@@ -1,8 +1,12 @@
 import html from "html-literal";
 
 export default state => html`
-  <h1>
-    This is the Contact page
-    <h1></h1>
-  </h1>
+  <div id="labels">
+    <h1>About</h1>
+    <div id="smalllabel">
+      <h6>
+        thank you for choosing to look at this page this site was created by....
+      </h6>
+    </div>
+  </div>
 `;
