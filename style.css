@@ -81,3 +81,12 @@ list-style: none;}
     margin: 0 auto;
     text-align: center;
   font-family: Play,regular;}
+
+  .articleTitle {
+    color:aliceblue;
+    margin-left: 10%;}
+
+    .articleBody {
+      color:aliceblue;
+      text-align: center;
+      margin: 0 auto;}

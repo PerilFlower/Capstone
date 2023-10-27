@@ -6,7 +6,10 @@ export default state => html`
   </div>
   <div id="smalllabel">
     <h6>click below to see all of our activities</h6>
-</div>
+  </div>
+  <div class="articleContainer">
+    <div class="articleTitle">Title and author</div>
+    <div class="articleBody">text</div>
     <h1>
       This is the activities page
       <h1></h1>
