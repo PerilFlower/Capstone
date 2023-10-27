@@ -9,10 +9,10 @@ export default state => html`
   <div>
       <h3>
         <div class="articleContainer">
-          <div class="articleTitle">Title and author</div>
-          <div class="articleBody">text</div>
+          <div class="articleTitle">${state.article.author}</div>
+          <div class="articleBody"> ${state.article.content}</div>
+          </h3>
         </div>
-      </h3>
     </div>
   </div>
 `;
