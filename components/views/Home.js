@@ -6,13 +6,12 @@ export default state => html`
     <h2>Articles</h2>
     <h2>Activities</h2>
   </div>
-  <div id="smalllabel">
-    <h6>click below to see most popular activities and articles!</h6>
-    <div id="weather">
+  <div>
       <h3>
-        The weather in ${state.weather.city} is ${state.weather.description}.
-        Temperature is ${state.weather.temp}F, and it feels like
-        ${state.weather.feelsLike}F.
+        <div class="articleContainer">
+          <div class="articleTitle">Title and author</div>
+          <div class="articleBody">text</div>
+        </div>
       </h3>
     </div>
   </div>
