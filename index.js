@@ -3,6 +3,7 @@ import * as store from "./store";
 import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
+
 const router = new Navigo("/");
 
 function render(state = store.Home) {
@@ -22,6 +23,7 @@ function afterRender() {
     document.querySelector("nav > ul").classList.toggle("hidden--mobile");
   });
 }
+
 router.hooks({
   before: (done, params) => {
     const view =
@@ -29,21 +31,41 @@ router.hooks({
         ? capitalize(params.data.view)
         : "Home";
 
+    const startDate = new Date();
+
     // Add a switch case statement to handle multiple routes
     switch (view) {
       case "Home":
+        // axios
+        //   .get(
+        //     `https://newsapi.org/v2/everything?q=space&from=2023-10-27&sortBy=popularity&apiKey=${process.env.NEWS_API_KEY}`
+        //   )
+        //   .then(response => {
+        //     console.log(response.data);
+        //     store.Home.news = response.data.articles;
+        //     done();
+        //   })
+        //   .catch(err => {
+        //     console.log(err);
+        //     done();
+        //   });
         axios
-          .get(`https://newsapi.org/v2/everything?q=${process.env.NEWS_API_KEY}q=Planets&from=2023-10-27&sortBy=popularity&apiKey`
+          .get(
+            `https://api.nasa.gov/neo/rest/v1/feed?start_date=${startDate.toISOString(
+              "YYYY-MM-DD"
+            )}&api_key=${process.env.NASA_OBJECTS_API_KEY}`
           )
           .then(response => {
-            console.log(response.json());
+            console.log(response.data);
+            store.Home.objects = response.data.near_earth_objects;
             done();
           })
           .catch(err => {
             console.log(err);
             done();
           });
-        }
+    }
+  },
   already: params => {
     const view =
       params && params.data && params.data.view
@@ -52,7 +74,8 @@ router.hooks({
 
     render(store[view]);
   }
-};
+});
+
 router
   .on({
     "/": () => render(),

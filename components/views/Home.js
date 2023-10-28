@@ -6,13 +6,15 @@ export default state => html`
     <h2>Articles</h2>
     <h2>Activities</h2>
   </div>
-  <div>
-      <h3>
-        <div class="articleContainer">
-          <div class="articleTitle">${state.article.author}</div>
-          <div class="articleBody"> ${state.article.content}</div>
-          </h3>
-        </div>
-    </div>
+  <div class="articleContainer">
+    ${state.news
+      .map(story => {
+        return html`
+          <div class="articleTitle">${story.title}</div>
+          <div class="articleBody">${story.content}</div>
+        `;
+      })
+      .join("")}
+    </h3>
   </div>
 `;
