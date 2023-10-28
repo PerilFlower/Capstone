@@ -2,19 +2,31 @@ import html from "html-literal";
 
 export default state => html`
   <div id="labels">
-    <h1>TRENDING</h1>
-    <h2>Articles</h2>
-    <h2>Activities</h2>
+    <h1>WELCOME</h1>
+    <h2>Picture of the day!</h2>
   </div>
-  <div class="articleContainer">
-    ${state.news
-      .map(story => {
+  <div class="photoContainer">
+    ${state.apoid
+      .map(picture => {
         return html`
-          <div class="articleTitle">${story.title}</div>
-          <div class="articleBody">${story.content}</div>
+          <div class="articleTitle">${picture.name}</div>
+          <div class="articleBody">${picture.date}</div>
+          <div class="articleBody">${picture.url}</div>
         `;
       })
       .join("")}
-    </h3>
+  </div>
+  <div id="labels">
+    <h2>Nearest objects to earth!</h2>
+  </div>
+  <div class="objectContainer">
+    ${state.objects
+      .map(asteroid => {
+        return html`
+          <div class="articleTitle">${asteroid.name}</div>
+          <div class="articleBody">${asteroid.close_approach_date}</div>
+        `;
+      })
+      .join("")}
   </div>
 `;

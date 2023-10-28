@@ -33,22 +33,26 @@ router.hooks({
 
     const startDate = new Date();
 
-    // Add a switch case statement to handle multiple routes
+    //Add a switch case statement to handle multiple routes
+    switch (view) {
+      case "Library":
+        axios
+          .get(
+            `https://newsapi.org/v2/everything?q=astronomy&from=2023-10-27&sortBy=popularity&apiKey=${process.env.NEWS_API_KEY}`
+          )
+          .then(response => {
+            console.log(response.data);
+            store.Library.news = response.data.articles;
+            done();
+          })
+          .catch(err => {
+            console.log(err);
+            done();
+          });
+        break;
+    }
     switch (view) {
       case "Home":
-        // axios
-        //   .get(
-        //     `https://newsapi.org/v2/everything?q=space&from=2023-10-27&sortBy=popularity&apiKey=${process.env.NEWS_API_KEY}`
-        //   )
-        //   .then(response => {
-        //     console.log(response.data);
-        //     store.Home.news = response.data.articles;
-        //     done();
-        //   })
-        //   .catch(err => {
-        //     console.log(err);
-        //     done();
-        //   });
         axios
           .get(
             `https://api.nasa.gov/neo/rest/v1/feed?start_date=${startDate.toISOString(
@@ -65,12 +69,40 @@ router.hooks({
             done();
           });
     }
+
+    switch (view) {
+      case "Home":
+        axios
+          .get(
+            `https://api.nasa.gov/planetary/apod?api_key=${startDate.toISOString(
+              "YYYY-MM-DD"
+            )}&api_key=${process.env.PIC_API_KEY}`
+          )
+          .then(response => {
+            console.log(response);
+            store.Home.apoid = response.data;
+            done();
+          })
+          .catch(err => {
+            console.log(err);
+            done();
+          });
+    }
+
+    params => {
+      const view =
+        params && params.data && params.data.view
+          ? capitalize(params.data.view)
+          : "Home";
+
+      render(store[view]);
+    };
   },
   already: params => {
     const view =
       params && params.data && params.data.view
         ? capitalize(params.data.view)
-        : "Home";
+        : "Library";
 
     render(store[view]);
   }
