@@ -33,17 +33,17 @@ router.hooks({
     switch (view) {
       case "Home":
         axios
-          .get(`https://newsapi.org/v2/everything?q=${process.env.NEWS_API_KEY}q=Planets&from=2023-10-27&sortBy=popularity&apiKey'
+          .get(`https://newsapi.org/v2/everything?q=${process.env.NEWS_API_KEY}q=Planets&from=2023-10-27&sortBy=popularity&apiKey`
           )
-          .then(function(response)) {
+          .then(response => {
             console.log(response.json());
-          })
             done();
-          }
+          })
           .catch(err => {
             console.log(err);
             done();
-          };
+          });
+        }
   already: params => {
     const view =
       params && params.data && params.data.view
@@ -52,7 +52,7 @@ router.hooks({
 
     render(store[view]);
   }
-});
+};
 router
   .on({
     "/": () => render(),
