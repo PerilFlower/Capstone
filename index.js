@@ -3,6 +3,7 @@ import * as store from "./store";
 import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
+
 const router = new Navigo("/");
 
 function render(state = store.Home) {
@@ -22,6 +23,7 @@ function afterRender() {
     document.querySelector("nav > ul").classList.toggle("hidden--mobile");
   });
 }
+
 router.hooks({
   before: (done, params) => {
     const view =
@@ -29,21 +31,52 @@ router.hooks({
         ? capitalize(params.data.view)
         : "Home";
 
-    // Add a switch case statement to handle multiple routes
+    //Add a switch case statement to handle multiple routes
     switch (view) {
-      case "Home":
+      case "Library":
         axios
-          .get(`https://newsapi.org/v2/everything?q=${process.env.NEWS_API_KEY}q=Planets&from=2023-10-27&sortBy=popularity&apiKey'
+          .get(
+            `https://newsapi.org/v2/everything?q=astronomy&from=2023-10-27&language=en&sortBy=popularity&apiKey=${process.env.NEWS_API_KEY}`
           )
-          .then(function(response)) {
-            console.log(response.json());
-          })
+          .then(response => {
+            console.log(response.data);
+            store.Library.news = response.data.articles;
             done();
-          }
+          })
           .catch(err => {
             console.log(err);
             done();
-          };
+          });
+        break;
+      case "Home": {
+        const startDate = new Date().toISOString().split("T")[0];
+        const neoRequest = axios.get(
+          `https://api.nasa.gov/neo/rest/v1/feed?start_date=${startDate}&end_date=${startDate}&api_key=${process.env.NASA_API_KEY}`
+        );
+        const apodRequest = axios.get(
+          `https://api.nasa.gov/planetary/apod?date=${startDate}&api_key=${process.env.NASA_API_KEY}`
+        );
+
+        Promise.allSettled([neoRequest, apodRequest])
+          .then(responses => {
+            const [neoResponse, apodResponse] = responses;
+
+            store.Home.objects =
+              neoResponse.value.data.near_earth_objects[startDate];
+            store.Home.apod = apodResponse.value.data;
+            console.log(store.Home);
+            done();
+          })
+          .catch(err => {
+            console.log(err);
+            done();
+          });
+        break;
+      }
+      default:
+        done();
+    }
+  },
   already: params => {
     const view =
       params && params.data && params.data.view
@@ -53,6 +86,7 @@ router.hooks({
     render(store[view]);
   }
 });
+
 router
   .on({
     "/": () => render(),

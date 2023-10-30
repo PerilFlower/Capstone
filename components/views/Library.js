@@ -6,12 +6,16 @@ export default state => html`
   </div>
   <div id="smalllabel">
     <h6>click below to see all of our articles!</h6>
-  </div>
-  <div class="articleContainer">
-    <div class="articleTitle">Title and author</div>
-    <div class="articleBody">text</div>
-    <h1>
-      This is the Library page
+    <div class="articleContainer">
+    ${state.news
+      .map(story => {
+        return html`
+          <div class="articleTitle">${story.title}</div>
+          <div class="articleBody">${story.description}</div>
+          <div class="articleBody"><a href="${story.url}" /></div>
+        `;
+      })
+      .join("")}
       <h1></h1>
     </h1>
   </div>

@@ -10,9 +10,6 @@ export default state => html`
         </div>
         <div class="profilephoto">
           <img src="${Image2}" height="70px" width="70px" />
-          <div id="effect">
-          <a href="Profile.js"></a>
-          <button>Profile</button>
         </div>
       </div>
     </div>
