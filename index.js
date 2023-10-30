@@ -31,14 +31,12 @@ router.hooks({
         ? capitalize(params.data.view)
         : "Home";
 
-    const startDate = new Date();
-
     //Add a switch case statement to handle multiple routes
     switch (view) {
       case "Library":
         axios
           .get(
-            `https://newsapi.org/v2/everything?q=astronomy&from=2023-10-27&sortBy=popularity&apiKey=${process.env.NEWS_API_KEY}`
+            `https://newsapi.org/v2/everything?q=astronomy&from=2023-10-27&language=en&sortBy=popularity&apiKey=${process.env.NEWS_API_KEY}`
           )
           .then(response => {
             console.log(response.data);
@@ -50,59 +48,40 @@ router.hooks({
             done();
           });
         break;
-    }
-    switch (view) {
-      case "Home":
-        axios
-          .get(
-            `https://api.nasa.gov/neo/rest/v1/feed?start_date=${startDate.toISOString(
-              "YYYY-MM-DD"
-            )}&api_key=${process.env.NASA_OBJECTS_API_KEY}`
-          )
-          .then(response => {
-            console.log(response.data);
-            store.Home.objects = response.data.near_earth_objects;
+      case "Home": {
+        const startDate = new Date().toISOString().split("T")[0];
+        const neoRequest = axios.get(
+          `https://api.nasa.gov/neo/rest/v1/feed?start_date=${startDate}&end_date=${startDate}&api_key=${process.env.NASA_API_KEY}`
+        );
+        const apodRequest = axios.get(
+          `https://api.nasa.gov/planetary/apod?date=${startDate}&api_key=${process.env.NASA_API_KEY}`
+        );
+
+        Promise.allSettled([neoRequest, apodRequest])
+          .then(responses => {
+            const [neoResponse, apodResponse] = responses;
+
+            store.Home.objects =
+              neoResponse.value.data.near_earth_objects[startDate];
+            store.Home.apod = apodResponse.value.data;
+            console.log(store.Home);
             done();
           })
           .catch(err => {
             console.log(err);
             done();
           });
+        break;
+      }
+      default:
+        done();
     }
-
-    switch (view) {
-      case "Home":
-        axios
-          .get(
-            `https://api.nasa.gov/planetary/apod?api_key=${startDate.toISOString(
-              "YYYY-MM-DD"
-            )}&api_key=${process.env.PIC_API_KEY}`
-          )
-          .then(response => {
-            console.log(response);
-            store.Home.apoid = response.data;
-            done();
-          })
-          .catch(err => {
-            console.log(err);
-            done();
-          });
-    }
-
-    params => {
-      const view =
-        params && params.data && params.data.view
-          ? capitalize(params.data.view)
-          : "Home";
-
-      render(store[view]);
-    };
   },
   already: params => {
     const view =
       params && params.data && params.data.view
         ? capitalize(params.data.view)
-        : "Library";
+        : "Home";
 
     render(store[view]);
   }

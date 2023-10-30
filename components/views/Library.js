@@ -11,11 +11,11 @@ export default state => html`
       .map(story => {
         return html`
           <div class="articleTitle">${story.title}</div>
-          <div class="articleBody">${story.content}</div>
+          <div class="articleBody">${story.description}</div>
+          <div class="articleBody"><a href="${story.url}" /></div>
         `;
       })
       .join("")}
-      This is the Library page
       <h1></h1>
     </h1>
   </div>

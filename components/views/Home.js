@@ -6,15 +6,9 @@ export default state => html`
     <h2>Picture of the day!</h2>
   </div>
   <div class="photoContainer">
-    ${state.apoid
-      .map(picture => {
-        return html`
-          <div class="articleTitle">${picture.name}</div>
-          <div class="articleBody">${picture.date}</div>
-          <div class="articleBody">${picture.url}</div>
-        `;
-      })
-      .join("")}
+    <div class="articleTitle">${state.apod.title}</div>
+    <div class="articleBody">${state.apod.date}</div>
+    <div class="articleBody"><img src="${state.apod.url}" /></div>
   </div>
   <div id="labels">
     <h2>Nearest objects to earth!</h2>
@@ -24,7 +18,9 @@ export default state => html`
       .map(asteroid => {
         return html`
           <div class="articleTitle">${asteroid.name}</div>
-          <div class="articleBody">${asteroid.close_approach_date}</div>
+          <div class="articleBody">
+            ${asteroid.close_approach_data[0].close_approach_date}
+          </div>
         `;
       })
       .join("")}

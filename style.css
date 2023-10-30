@@ -90,3 +90,28 @@ list-style: none;}
       color:aliceblue;
       text-align: center;
       margin: 0 auto;}
+
+      footer{
+        position: relative;
+        font-size:small;
+        text-align:center;
+        height:50px;
+        background-color:grey;
+        clear: both;}
+.articleContainer {
+  position: relative;
+  min-height: 200vh;
+  width: 100%;}
+
+  .objectContainer {
+    position: relative;
+    min-height: 200vh;
+    width: 100%;}
+    .aboutSection{
+      position: relative;
+      min-height: 200vh;
+      width: 100%;}
+      .formContainer {
+        position: relative;
+        min-height: 200vh;
+        width: 100%;}
