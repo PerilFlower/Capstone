@@ -13,15 +13,45 @@ function render(state = store.Home) {
   ${Main(state)}
   ${Footer()}
   `;
-  afterRender();
+  afterRender(state);
   router.updatePageLinks();
 }
 
-function afterRender() {
+function afterRender(state) {
   // add menu toggle to bars icon in nav bar
   document.querySelector(".fa-bars").addEventListener("click", () => {
     document.querySelector("nav > ul").classList.toggle("hidden--mobile");
   });
+
+  if (state.view === "Contact") {
+    document.getElementById("contactform").addEventListener("submit", event => {
+      event.preventDefault();
+
+      const inputList = event.target.elements;
+
+      const requestData = {
+        name: inputList.name.value,
+        phone: inputList.phone.value,
+        email: inputList.email.value,
+        msg: inputList.msg.value
+      };
+      // Log the request body to the console
+      console.log("request Body", requestData);
+
+      axios
+        // Make a POST request to the API to create a new pizza
+        .post(`${process.env.API_URL}/contacts`, requestData)
+        .then(response => {
+          //  Then push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
+          // store.Contact.contacts.push(response.data);
+          router.navigate("/Contact");
+        })
+        // If there is an error log it to the console
+        .catch(error => {
+          console.log("It puked", error);
+        });
+    });
+  }
 }
 
 router.hooks({
