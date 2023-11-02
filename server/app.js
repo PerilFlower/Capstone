@@ -1,8 +1,9 @@
 // 'Import' the Express module instead of http
-import express from "express";
+import express, { response } from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import contacts from "./routers/contacts.js";
+import axios from "axios";
 // import pizzas from "./routers/pizzas.js";
 // Initialize the Express application
 const app = express();
@@ -63,6 +64,20 @@ app.get("/status", (request, response) => {
 
   // New version of Service Healthy
   response.status(200).json({ message: "Service Healthy" });
+});
+
+app.get("/news", (request, response) => {
+  axios
+    .get(
+      `https://newsapi.org/v2/everything?q=astronomy&from=2023-10-27&language=en&sortBy=popularity&apiKey=${process.env.NEWS_API_KEY}`
+    )
+    .then(newsdata => {
+      console.log(newsdata.data);
+      response.json(newsdata.data.articles);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 app.use("/contacts", contacts);
