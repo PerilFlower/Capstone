@@ -65,12 +65,10 @@ router.hooks({
     switch (view) {
       case "Library":
         axios
-          .get(
-            `https://newsapi.org/v2/everything?q=astronomy&from=2023-10-27&language=en&sortBy=popularity&apiKey=${process.env.NEWS_API_KEY}`
-          )
+          .get(`${process.env.API_URL}/news`)
           .then(response => {
             console.log(response.data);
-            store.Library.news = response.data.articles;
+            store.Library.news = response.data;
             done();
           })
           .catch(err => {
